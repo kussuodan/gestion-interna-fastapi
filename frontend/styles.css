@@ -1,0 +1,261 @@
+:root{
+    --paper:        #ECE6D4;
+    --paper-deep:   #DED5B7;
+    --surface:      #F7F3E6;
+    --ink:          #24271E;
+    --ink-muted:    #6C6553;
+    --line:         #C9BE9D;
+    --line-soft:    #DBD2B5;
+    --stamp:        #9B3B2C;
+    --stamp-dark:   #7A2E22;
+    --ok:           #3F6448;
+    --ok-bg:        #E4EBDF;
+    --warn:         #A97423;
+    --warn-bg:      #F1E7CF;
+    --danger:       #5B6470;
+    --danger-bg:    #E4E4DE;
+    --final:        #3C4C68;
+    --final-bg:     #DFE3EA;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-font-smoothing:antialiased; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 500px at 10% -10%, rgba(255,255,255,.35), transparent 60%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"IBM Plex Sans", -apple-system, Segoe UI, sans-serif;
+    line-height:1.5;
+    padding: 28px 20px 60px;
+  }
+
+  .sheet{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Cabecera tipo carpeta de expediente ---------- */
+  header.folder{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    padding: 22px 28px 20px;
+    position: relative;
+  }
+  header.folder::before{
+    content:"";
+    position:absolute;
+    top:-14px; left:28px;
+    width:150px; height:14px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-bottom:none;
+    border-radius:8px 8px 0 0;
+  }
+  .folder .tag{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    color:var(--stamp);
+    display:block;
+    margin-bottom:6px;
+  }
+  .folder h1{
+    font-family:"Source Serif 4", Georgia, serif;
+    font-weight:600;
+    font-size: clamp(26px, 4vw, 34px);
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .folder p{
+    margin:0;
+    color:var(--ink-muted);
+    font-size:15px;
+    max-width:56ch;
+  }
+
+  .status-bar{
+    background:var(--paper-deep);
+    border:1px solid var(--line);
+    border-top:none;
+    padding:10px 28px;
+    font-size:13px;
+    color:var(--ink-muted);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--danger);
+    flex:none;
+  }
+  .dot.on{ background:var(--ok); }
+  #apiBase{ font-family:"IBM Plex Mono", monospace; color:var(--ink); }
+
+  main{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-top:none;
+    border-radius: 0 0 10px 10px;
+    padding: 26px 28px 34px;
+  }
+
+  section{ margin-top: 34px; }
+  section:first-of-type{ margin-top: 8px; }
+
+  h2{
+    font-family:"Source Serif 4", Georgia, serif;
+    font-weight:600;
+    font-size:19px;
+    margin: 0 0 4px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .hint{
+    font-size:13px;
+    color:var(--ink-muted);
+    margin: 6px 0 16px;
+  }
+
+  .forms-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+  }
+  @media (max-width: 760px){
+    .forms-grid{ grid-template-columns: 1fr; }
+  }
+
+  form{
+    background: var(--paper);
+    border:1px solid var(--line-soft);
+    border-radius:8px;
+    padding: 18px 18px 20px;
+  }
+  form h3{
+    font-family:"Source Serif 4", Georgia, serif;
+    font-size:16px;
+    font-weight:600;
+    margin:0 0 14px;
+  }
+
+  .field{ margin-bottom: 13px; }
+  .field label{
+    display:block;
+    font-size:12.5px;
+    color:var(--ink-muted);
+    margin-bottom:4px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%;
+    padding:9px 10px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:5px;
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .field textarea{ resize: vertical; min-height:56px; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline: 2px solid var(--stamp);
+    outline-offset: 1px;
+  }
+
+  button.primary{
+    width:100%;
+    margin-top:4px;
+    padding:10px 14px;
+    background:var(--stamp);
+    color:#F7F1E4;
+    border:none;
+    border-radius:5px;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.01em;
+    cursor:pointer;
+    transition: background .15s ease;
+  }
+  button.primary:hover{ background:var(--stamp-dark); }
+  button.primary:disabled{ opacity:.55; cursor:default; }
+
+  .msg{
+    margin-top:10px;
+    font-size:13px;
+    border-radius:5px;
+    padding: 8px 10px;
+    display:none;
+  }
+  .msg.show{ display:block; }
+  .msg.ok{ background:var(--ok-bg); color:var(--ok); }
+  .msg.err{ background:var(--danger-bg); color:#6E2A20; }
+
+  /* ---------- Tablas tipo libro de registro ---------- */
+  table{
+    width:100%;
+    border-collapse: collapse;
+    font-size:14px;
+  }
+  thead th{
+    text-align:left;
+    font-weight:600;
+    font-size:12.5px;
+    color:var(--ink-muted);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td{
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: middle;
+  }
+  tbody tr:hover{ background: rgba(155,59,44,.04); }
+  td.id, td.date{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12.5px;
+    color:var(--ink-muted);
+    white-space:nowrap;
+  }
+  td.empty{
+    text-align:center;
+    color:var(--ink-muted);
+    padding: 22px 10px;
+    font-style:italic;
+  }
+  .role-pill{
+    font-size:11.5px;
+    padding:2px 8px;
+    border-radius:4px;
+    border:1px solid var(--line);
+    color:var(--ink-muted);
+  }
+
+  .estado-select{
+    font-family:inherit;
+    font-size:12.5px;
+    font-weight:600;
+    padding:4px 6px;
+    border-radius:4px;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .estado-Pendiente{ background:var(--warn-bg); color:var(--warn); }
+  .estado-Aprobada{ background:var(--ok-bg); color:var(--ok); }
+  .estado-Rechazada{ background:var(--danger-bg); color:var(--danger); }
+  .estado-Finalizada{ background:var(--final-bg); color:var(--final); }
+
+  .table-scroll{ overflow-x:auto; }
+
+  footer{
+    max-width:980px;
+    margin: 18px auto 0;
+    font-size:12.5px;
+    color:var(--ink-muted);
+    text-align:center;
+  }

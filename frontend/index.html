@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sistema de Gestión Interna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="sheet">
+
+  <header class="folder">
+    <span class="tag">Intranet · módulo interno</span>
+    <h1>Gestión de usuarios y solicitudes</h1>
+    <p>Alta de personal y seguimiento de trámites internos (vacaciones, soporte técnico y más) en un solo lugar.</p>
+  </header>
+
+  <div class="status-bar">
+    <span class="dot" id="statusDot"></span>
+    <span id="statusText">Comprobando conexión con la API…</span>
+    <span style="margin-left:auto;">API: <span id="apiBase"></span></span>
+  </div>
+
+  <main>
+
+    <section>
+      <h2>Alta de registros</h2>
+      <p class="hint">Crea un usuario y, con ese usuario ya existente, registra una solicitud a su nombre.</p>
+
+      <div class="forms-grid">
+
+        <form id="formUsuario">
+          <h3>Nuevo usuario</h3>
+
+          <div class="field">
+            <label for="u_nombre">Nombre completo</label>
+            <input id="u_nombre" type="text" required placeholder="Ej. Laura Méndez" />
+          </div>
+
+          <div class="field">
+            <label for="u_email">Correo electrónico</label>
+            <input id="u_email" type="email" required placeholder="laura.mendez@empresa.com" />
+          </div>
+
+          <div class="field">
+            <label for="u_rol">Rol</label>
+            <select id="u_rol" required>
+              <option value="Admin">Admin</option>
+              <option value="Empleado" selected>Empleado</option>
+              <option value="Consulta">Consulta</option>
+            </select>
+          </div>
+
+          <button class="primary" type="submit">Registrar usuario</button>
+          <div class="msg" id="u_msg"></div>
+        </form>
+
+        <form id="formSolicitud">
+          <h3>Nueva solicitud</h3>
+
+          <div class="field">
+            <label for="s_usuario">Usuario solicitante</label>
+            <select id="s_usuario" required>
+              <option value="" disabled selected>Selecciona un usuario…</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="s_tipo">Tipo de solicitud</label>
+            <select id="s_tipo" required>
+              <option value="Permiso de vacaciones">Permiso de vacaciones</option>
+              <option value="Soporte técnico">Soporte técnico</option>
+              <option value="Permiso de ausencia">Permiso de ausencia</option>
+              <option value="Solicitud de material">Solicitud de material</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="s_desc">Descripción</label>
+            <textarea id="s_desc" placeholder="Detalles de la solicitud (opcional)"></textarea>
+          </div>
+
+          <button class="primary" type="submit">Registrar solicitud</button>
+          <div class="msg" id="s_msg"></div>
+        </form>
+
+      </div>
+    </section>
+
+    <section>
+      <h2>Usuarios registrados</h2>
+      <p class="hint">Listado completo, ordenado del más reciente al más antiguo.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:56px;">ID</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th style="width:110px;">Rol</th>
+              <th style="width:150px;">Alta</th>
+            </tr>
+          </thead>
+          <tbody id="tablaUsuarios">
+            <tr><td class="empty" colspan="5">Cargando usuarios…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Historial de solicitudes</h2>
+      <p class="hint">El estado se puede actualizar directamente desde la tabla.</p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:56px;">ID</th>
+              <th>Solicitante</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th style="width:130px;">Estado</th>
+              <th style="width:150px;">Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="tablaSolicitudes">
+            <tr><td class="empty" colspan="6">Cargando solicitudes…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>Sistema de ejemplo para intranet · datos almacenados localmente en <code>database.db</code></footer>
+
+<script src="app.js" defer></script>
+
+</body>
+</html>
